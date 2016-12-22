@@ -23,12 +23,14 @@ async def add(left : int, right : int):
 async def roll(dice : str):
     """Rolls a dice in NdN format."""
     try:
-        rolls, limit = map(int, dice.split('d'))
+            rolls, limit = map(int, dice.split('d'))
     except Exception:
         await bot.say('Format has to be in NdN!')
         return
-
-    result = ', '.join(str(random.randint(1, limit)) for r in range(rolls))
+    if(rolls > 50 or limit > 50):
+        result = 'HEY NOW THAT\'S A LOTTA DICE!'
+    else:
+        result = ', '.join(str(random.randint(1, limit)) for r in range(rolls))
     await bot.say(result)
 
 @bot.command(description='For when you wanna settle the score some other way')
