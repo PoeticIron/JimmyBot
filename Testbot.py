@@ -1,6 +1,9 @@
 import discord
 from discord.ext import commands
 import random
+from googleapiclient.discovery import build
+
+import pprint
 
 description = '''An example bot to showcase the discord.ext.commands extension
 module.
@@ -13,11 +16,21 @@ async def on_ready():
     print(bot.user.name)
     print(bot.user.id)
     print('------')
-
 @bot.command()
-async def add(left : int, right : int):
-    """Adds two numbers together."""
-    await bot.say(left + right)
+async def search(text : str):
+
+    api_key = "AIzaSyDEI9ei37MeTgaDyQhayyXSdHPM8ZJ4Gfk"
+    cse_id = "001464282721790659668:_ja4f_we2rk"
+
+    def google_search(search_term, api_key, cse_id, **kwargs):
+        service = build("customsearch", "v1", developerKey=api_key)
+        res = service.cse().list(q=search_term, cx=cse_id, **kwargs).execute()
+        pprint.pprint(res)
+        return res['items']
+
+    results = google_search(text, api_key, cse_id, num=1, searchType= 'image')
+    for result in results:
+        await bot.say(result['link'])
 
 @bot.command()
 async def roll(dice : str):
@@ -41,8 +54,8 @@ async def choose(*choices : str):
 @bot.command(description='Actually implemented by me')
 async def Farage():
     """Does largely Nothing"""
-    await bot.say("You can't barrage the farage!");
-    
+    await bot.say("You can't barrage the farage! http://www.thereveillenwu.com/wp-content/uploads/2016/06/6a00d8341bf8f353ef017eeacb1b2e970d.jpg");
+  
 @bot.command()
 async def repeat(times : int, content='repeating...'):
     """Repeats a message multiple times."""
@@ -54,17 +67,6 @@ async def joined(member : discord.Member):
     """Says when a member joined."""
     await bot.say('{0.name} joined in {0.joined_at}'.format(member))
 
-@bot.group(pass_context=True)
-async def cool(ctx):
-    """Says if a user is cool.
-    In reality this just checks if a subcommand is being invoked.
-    """
-    if ctx.invoked_subcommand is None:
-        await bot.say('No, {0.subcommand_passed} is not cool'.format(ctx))
 
-@cool.command(name='bot')
-async def _bot():
-    """Is the bot cool?"""
-    await bot.say('Yes, the bot is cool.')
 
 bot.run("MjYxNDkwODE2NzQzMTEyNzA0.Cz1-Yg.mUHdeAMQqEWxYfor9UiXk6UnhPg")
