@@ -86,7 +86,7 @@ async def Mike(amount : int):
 async def hotdogs(amount : int):
     await bot.say(":hotdog" * amount)
 @bot.command()
-async def Hariotttt(amount : int):
-    await bot.say("https://i1.rgstatic.net/ii/profile.image/AS%3A272457688940593@1441970383991_l/Mike_Roggenkamp.png")
+async def Hariotttt():
+    await bot.say("https://ih0.redbubble.net/image.37276369.1324/flat,800x800,075,f.u2.jpg")
 
 bot.run("MjYxNDkwODE2NzQzMTEyNzA0.Cz1-Yg.mUHdeAMQqEWxYfor9UiXk6UnhPg")
