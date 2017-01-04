@@ -75,12 +75,18 @@ async def repeat(times : int, content='repeating...'):
     """Repeats a message multiple times."""
     for i in range(times):
         await bot.say(content)
-
 @bot.command()
 async def joined(member : discord.Member):
     """Says when a member joined."""
     await bot.say('{0.name} joined in {0.joined_at}'.format(member))
-
-
+@bot.command()
+async def Mike(amount : int):
+    await bot.say("https://i1.rgstatic.net/ii/profile.image/AS%3A272457688940593@1441970383991_l/Mike_Roggenkamp.png " * amount)
+@bot.command()
+async def hotdogs(amount : int):
+    await bot.say(":hotdog" * amount)
+@bot.command()
+async def Hariotttt(amount : int):
+    await bot.say("https://i1.rgstatic.net/ii/profile.image/AS%3A272457688940593@1441970383991_l/Mike_Roggenkamp.png")
 
 bot.run("MjYxNDkwODE2NzQzMTEyNzA0.Cz1-Yg.mUHdeAMQqEWxYfor9UiXk6UnhPg")
