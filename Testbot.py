@@ -81,7 +81,7 @@ async def joined(member : discord.Member):
     await bot.say('{0.name} joined in {0.joined_at}'.format(member))
 @bot.command()
 async def Mike(amount : int);
-    await bot.say(":mikey:" * amount)
+    await bot.say("https://i1.rgstatic.net/ii/profile.image/AS%3A272457688940593@1441970383991_l/Mike_Roggenkamp.png" * amount)
 
 
 bot.run("MjYxNDkwODE2NzQzMTEyNzA0.Cz1-Yg.mUHdeAMQqEWxYfor9UiXk6UnhPg")
