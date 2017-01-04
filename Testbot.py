@@ -18,6 +18,7 @@ async def on_ready():
     print('------')
 @bot.command()
 async def search(*text : str):
+    """Searches google for an image described by input"""
     finaltext = " "
 
     for word in text:
@@ -56,12 +57,15 @@ async def choose(*choices : str):
     await bot.say(random.choice(choices))
 @bot.command()
 async def KrillMe():
+    """Posts Krill"""
     await bot.say("http://coolaustralia.org/wp-content/uploads/2013/05/billandwill.jpg")
 @bot.command()
 async def Mods():
+    """Posts Mods"""
     await bot.say("Don't mind me, just taking my hotdogs for a walk ( ͡° ͜ʖ ͡°)╯╲___ :hotdog:")
 @bot.command()
 async def Stalin():
+    """Posts Stalin"""
     await bot.say("http://imgur.com/gallery/jXMUIYP")
 @bot.command(description='Actually implemented by me')
 async def Farage():
@@ -69,6 +73,7 @@ async def Farage():
     await bot.say("You can't barrage the farage! http://www.thereveillenwu.com/wp-content/uploads/2016/06/6a00d8341bf8f353ef017eeacb1b2e970d.jpg");
 @bot.command()
 async def Kojimbo():
+    """Kojima-san"""
     await bot.say("http://static1.gamespot.com/uploads/original/43/434805/3064712-1248675325-Hideo.jpg")
 @bot.command()
 async def repeat(times : int, content='repeating...'):
@@ -81,27 +86,15 @@ async def joined(member : discord.Member):
     await bot.say('{0.name} joined in {0.joined_at}'.format(member))
 @bot.command()
 async def Mike(amount : int):
+    """The best FORTRAN programmer"""
     await bot.say("https://i1.rgstatic.net/ii/profile.image/AS%3A272457688940593@1441970383991_l/Mike_Roggenkamp.png " * amount)
 @bot.command()
 async def hotdogs(amount : int):
+    """Posts a set amount of hotdogs based on input"""
     await bot.say(":hotdog: " * amount)
 @bot.command()
 async def Hariotttt():
+    """Post ainsley"""
     await bot.say("https://ih0.redbubble.net/image.37276369.1324/flat,800x800,075,f.u2.jpg")
-@bot.command()
-async def Help():
-    await bot.say("""
-Basic Commands:
-    Search [item] - Grabs first image from google search
-    Roll [die type | amount] - Rolls specified amount of dice
-    Choice [Choices] - chooses between the choices presented
-    KrillMe
-    Mods
-    Stalin - you know
-    Farage
-    Kojimbo
-    repeat [times | word]
-    Mike - posts Mike of course
-    hotdogs - when you want a picture of a gahd dang hotdog
-    Hariottt""")
+
 bot.run("MjYxNDkwODE2NzQzMTEyNzA0.Cz1-Yg.mUHdeAMQqEWxYfor9UiXk6UnhPg")
