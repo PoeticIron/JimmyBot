@@ -88,5 +88,20 @@ async def hotdogs(amount : int):
 @bot.command()
 async def Hariotttt():
     await bot.say("https://ih0.redbubble.net/image.37276369.1324/flat,800x800,075,f.u2.jpg")
-
+@bot.command()
+async def Help():
+    await bot.say("""
+Basic Commands:
+    Search [item] - Grabs first image from google search
+    Roll [die type | amount] - Rolls specified amount of dice
+    Choice [Choices] - chooses between the choices presented
+    KrillMe
+    Mods
+    Stalin - you know
+    Farage
+    Kojimbo
+    repeat [times | word]
+    Mike - posts Mike of course
+    hotdogs - when you want a picture of a gahd dang hotdog
+    Hariottt""")
 bot.run("MjYxNDkwODE2NzQzMTEyNzA0.Cz1-Yg.mUHdeAMQqEWxYfor9UiXk6UnhPg")
