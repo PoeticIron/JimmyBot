@@ -17,6 +17,23 @@ async def on_ready():
     print(bot.user.id)
     print('------')
 @bot.command()
+async def define(*text: str):
+    finaltext = 'define '
+    for word in text:
+        finaltext = finaltext + word  + " "
+        
+    api_key = "AIzaSyDEI9ei37MeTgaDyQhayyXSdHPM8ZJ4Gfk"
+    cse_id = "001464282721790659668:_ja4f_we2rk"
+    def google_search(search_term, api_key, cse_id, **kwargs):
+        service = build("customsearch", "v1", developerKey=api_key)
+        res = service.cse().list(q=search_term, cx=cse_id, **kwargs).execute()
+        pprint.pprint(res)
+        return res['items']    
+    results = google_search(finaltext, api_key, cse_id, num=1)
+    for result in results:
+        formatText="```" + result['snippet'] + "```"
+        await bot.say(formatText)
+@bot.command()
 async def search(*text : str):
     """Searches google for an image described by input"""
     finaltext = " "
@@ -35,7 +52,8 @@ async def search(*text : str):
 
     results = google_search(finaltext, api_key, cse_id, num=1, searchType= 'image')
     for result in results:
-        await bot.say(result['link'])
+        formatText = "" + result['link'] + ""
+        await bot.say(formatText)
 
 @bot.command()
 async def roll(dice : str):
