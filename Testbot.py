@@ -118,7 +118,9 @@ async def Hariotttt():
     """Post ainsley"""
     await bot.say("https://ih0.redbubble.net/image.37276369.1324/flat,800x800,075,f.u2.jpg")
 @bot.command()
-async def JoJo:
-    """Asks if JOJO"""
-    await bot.say("http://i3.kym-cdn.com/photos/images/original/001/195/575/abf.jpg")
+async def Tides():
+    """How quickly the tides turn"""
+    await bot.say("http://i1.kym-cdn.com/photos/images/original/001/072/409/23c.gif")
+
+
 bot.run("MjYxNDkwODE2NzQzMTEyNzA0.Cz1-Yg.mUHdeAMQqEWxYfor9UiXk6UnhPg")
