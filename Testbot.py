@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import random
+
 from googleapiclient.discovery import build
 import discord.channel
 from discord.channel import Channel
@@ -71,6 +72,11 @@ async def jimmy():
     """In case I'm not here obviously"""
     random.seed()
     #await bot.say(foo)
+
+@bot.command()
+async def Noice():
+    await bot.say("http://is2.4chan.org/vg/1486404760144.gif")
+
 @bot.command()
 async def roll(dice : str):
     """Rolls a dice in NdN format."""
@@ -97,7 +103,7 @@ async def KrillMe():
 @bot.command()
 async def Mods():
     """Posts Mods"""
-    if (randint(0,1) == 1):
+    if (random.randint(0,1) == 1):
         await bot.say("Don't mind me, just taking my hotdogs for a walk ( ͡° ͜ʖ ͡°)╯╲___ :hotdog:")
     else:
         await bot.say("( ͡° ͜ʖ ͡°)╯╲___卐卐卐卐")
@@ -150,7 +156,6 @@ async def meme(message):
 async def Delet():
     """Posts Delet this"""
     await bot.say("http://imgur.com/a/QrzQV")
-
 #@asyncio.coroutine
 #def on_message(message):
     #yield from self.process_commands(message)
