@@ -2,13 +2,26 @@ import discord
 from discord.ext import commands
 import random
 from googleapiclient.discovery import build
-from random import *
+import discord.channel
+from discord.channel import Channel
+import discord.message
+from discord.message import Message
 import pprint
-
+import asyncio
+import discord.client
+from discord.client import Client
 description = '''An example bot to showcase the discord.ext.commands extension
 module.
 There are a number of utility commands being showcased here.'''
-bot = commands.Bot(command_prefix='?', description=description)
+bot = commands.Bot(command_prefix='.',description=description)
+print(discord.channel.__file__)
+
+client = Client()
+@bot.event
+async def on_message(message):
+    if(message.content):
+        print('bap')
+        bot.send_message(message.channel, "helooo",)
 
 @bot.event
 async def on_ready():
@@ -21,7 +34,7 @@ async def define(*text: str):
     finaltext = 'define '
     for word in text:
         finaltext = finaltext + word  + " "
-        
+    
     api_key = "AIzaSyDEI9ei37MeTgaDyQhayyXSdHPM8ZJ4Gfk"
     cse_id = "001464282721790659668:_ja4f_we2rk"
     def google_search(search_term, api_key, cse_id, **kwargs):
@@ -54,7 +67,12 @@ async def search(*text : str):
     for result in results:
         formatText = "" + result['link'] + ""
         await bot.say(formatText)
-
+@bot.command()
+async def jimmy():
+    """In case I'm not here obviously"""
+    foo=random.choice(["Remember the playlist!", "I blame Sean personally.", ".play seinfeld in the trap", "Don't forget I hate you all", "Don't forget you're here forever", "have you tried turning it on and off again", "that's the dumbest shit I've heard today.", "delete that fucking bird right now I swear to god", "nice microphone quality", "get a headset", "I might be a nazi mod but at least I'm not the one posting shit", "beep boop sean is a ro-bot", "arma 3 isn't a game it's a tactical simulator", "that's XCOM baby", "not my fault you're shit at games", "My anime is better than yours, by virtue of how awful it is"])
+    
+    await bot.say(foo)
 @bot.command()
 async def roll(dice : str):
     """Rolls a dice in NdN format."""
