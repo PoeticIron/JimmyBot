@@ -10,13 +10,13 @@ import discord.server
 from discord.server import Server
 import pprint
 import asyncio
+import pyRandomdotOrg
 
 description = '''An example bot to showcase the discord.ext.commands extension
 module.
 There are a number of utility commands being showcased here.'''
 bot = commands.Bot(command_prefix='?',description=description)
-print(discord.channel.__file__)
-print (bot.command_prefix)
+
 @bot.event
 async def on_ready():
     bot.send_message('238261264818634752', 'boop')
@@ -69,9 +69,8 @@ async def search(*text : str):
 @bot.command()
 async def jimmy():
     """In case I'm not here obviously"""
-    foo=random.choice(["ukraine is game to you!?","https://i1.rgstatic.net/ii/profile.image/AS%3A272457688940593@1441970383991_l/Mike_Roggenkamp.png ","Don't mind me, just taking my hotdogs for a walk ( ͡° ͜ʖ ͡°)╯╲___ :hotdog:","( ͡° ͜ʖ ͡°)╯╲___卐卐卐卐","http://coolaustralia.org/wp-content/uploads/2013/05/billandwill.jpg","Remember the playlist!", "I blame Sean personally.", ".play seinfeld in the trap", "Don't forget I hate you all", "Don't forget you're here forever", "have you tried turning it on and off again", "that's the dumbest shit I've heard today.", "delete that fucking bird right now I swear to god", "nice microphone quality", "get a headset", "I might be a nazi mod but at least I'm not the one posting shit", "beep boop sean is a ro-bot", "arma 3 isn't a game it's a tactical simulator", "that's XCOM baby", "not my fault you're shit at games", "My anime is better than yours, by virtue of how awful it is"])
-    
-    await bot.say(foo)
+    random.seed()
+    #await bot.say(foo)
 @bot.command()
 async def roll(dice : str):
     """Rolls a dice in NdN format."""
@@ -149,11 +148,11 @@ async def meme(message):
     return 'boop'
 
 
-@asyncio.coroutine
-def on_message(message):
-    yield from self.process_commands(message)
-    if("jimmy" in message.content ):
-        foo=random.choice([".play tidus tremor", "┬─┬﻿ ノ( ゜-゜ノ)","(╯°□°）╯︵ ┻━┻", "¯\_(ツ)_/¯", "python is a shit language. but it's mine.","jimmy > hime","1-2 fridays","B U I L D W A L L","Remember the playlist!", "I blame Sean personally.", ".play seinfeld in the trap", "Don't forget I hate you all", "Don't forget you're here forever", "have you tried turning it on and off again", "that's the dumbest shit I've heard today.", "delete that fucking bird right now I swear to god", "nice microphone quality", "get a headset", "I might be a nazi mod but at least I'm not the one posting shit", "beep boop sean is a ro-bot", "arma 3 isn't a game it's a tactical simulator", "that's XCOM baby", "not my fault you're shit at games", "My anime is better than yours, by virtue of how awful it is"])
-        bot.send_message(message.channel, foo, tts=1)
-    print('bloop')
+#@asyncio.coroutine
+#def on_message(message):
+    #yield from self.process_commands(message)
+   # if("jimmy" in message.content ):
+        #foo=random.choice(["day seven. still have not finished the binding of isaac", "NEVER SHOULD HAVE COME HERE", "YOU'VE VIOLATED MY MOTHER!", "PICKED A BAD TIME TO GET LOST FRIEND", "You'll MAKE A FINE RUG, CAT", "Am I supposed to stand idly by WHILE A DRAGON BURNS MY HOLD AND SLAUGHTERS MY PEOPLE!?","porque no los dos","tough love is the only love","ukraine is game to you!?","https://i1.rgstatic.net/ii/profile.image/AS%3A272457688940593@1441970383991_l/Mike_Roggenkamp.png ","Don't mind me, just taking my hotdogs for a walk ( ͡° ͜ʖ ͡°)╯╲___ :hotdog:","( ͡° ͜ʖ ͡°)╯╲___卐卐卐卐","http://coolaustralia.org/wp-content/uploads/2013/05/billandwill.jpg","Remember the playlist!", "I blame Sean personally.", ".play seinfeld in the trap", "Don't forget I hate you all", "Don't forget you're here forever", "have you tried turning it on and off again", "that's the dumbest shit I've heard today.", "delete that fucking bird right now I swear to god", "nice microphone quality", "get a headset", "I might be a nazi mod but at least I'm not the one posting shit", "beep boop sean is a ro-bot", "arma 3 isn't a game it's a tactical simulator", "that's XCOM baby", "not my fault you're shit at games", "My anime is better than yours, by virtue of how awful it is"])
+        #bot.send_message(message.channel, foo, tts=1)
+    #print('bloop')
 bot.run("MjYxNDkwODE2NzQzMTEyNzA0.Cz1-Yg.mUHdeAMQqEWxYfor9UiXk6UnhPg")
