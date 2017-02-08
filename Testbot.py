@@ -72,9 +72,11 @@ async def jimmy():
     """In case I'm not here obviously"""
     random.seed()
     #await bot.say(foo)
+
 @bot.command()
 async def Noice():
     await bot.say("http://is2.4chan.org/vg/1486404760144.gif")
+
 @bot.command()
 async def roll(dice : str):
     """Rolls a dice in NdN format."""
@@ -150,8 +152,10 @@ async def Tides():
 async def meme(message):
     await bot.send_message(message.channel, foo, tts=1)
     return 'boop'
-
-
+@bot.command()
+async def Delet():
+    """Posts Delet this"""
+    await bot.say("http://imgur.com/a/QrzQV")
 #@asyncio.coroutine
 #def on_message(message):
     #yield from self.process_commands(message)
