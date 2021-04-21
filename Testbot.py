@@ -4,31 +4,44 @@ import random
 
 from googleapiclient.discovery import build
 import discord.channel
-from discord.channel import Channel
 import discord.message
 from discord.message import Message
-import discord.server
-from discord.server import Server
+import discord.guild
+from discord.guild import Guild
 import pprint
 import asyncio
-import pyRandomdotOrg
+##import pyRandomdotOrg
 
 description = '''An example bot to showcase the discord.ext.commands extension
 module.
 There are a number of utility commands being showcased here.'''
 bot = commands.Bot(command_prefix='?',description=description)
 
+lastMentioned = ""
 @bot.event
 async def on_ready():
-    bot.send_message('238261264818634752', 'boop')
+    guild = bot.guilds[0]
+    chann = guild.channels[0]
     print('Logged in as')
     print(bot.user.name)
     print(bot.user.id)
     print('------')
     print(bot)
 
-@bot.command()
-async def define(*text: str):
+@bot.event
+async def on_message(message):
+    if(lastMentioned == null):
+        lastMentioned = ""
+    if("jimmy" in message.content.lower() ):
+        if(message.author.name == lastMentioned):
+            await message.channel.send("You really think of me that way, huh " + message.author.name + "?")
+        else:    
+            await message.channel.send("You're not talking about me, are you " + message.author.name + "?")
+            lastMentioned = message.author.name
+
+
+@bot.command(pass_context=True)
+async def define(ctx, *text: str):
     finaltext = 'define '
     for word in text:
         finaltext = finaltext + word  + " "
@@ -43,9 +56,9 @@ async def define(*text: str):
     results = google_search(finaltext, api_key, cse_id, num=1)
     for result in results:
         formatText="```" + result['snippet'] + "```"
-        await bot.say(formatText)
-@bot.command()
-async def search(*text : str):
+        await ctx.send(formatText)
+@bot.command(pass_context=True)
+async def search(ctx,*text : str):
     print('got here')
 
     """Searches google for an image described by input"""
@@ -66,7 +79,7 @@ async def search(*text : str):
     results = google_search(finaltext, api_key, cse_id, num=1, searchType= 'image')
     for result in results:
         formatText = "" + result['link'] + ""
-        await bot.say(formatText)
+        await ctx.send(formatText)
 @bot.command()
 async def jimmy():
     """In case I'm not here obviously"""
@@ -74,56 +87,44 @@ async def jimmy():
     #await bot.say(foo)
 
 @bot.command()
-async def Noice():
+async def Noice(pass_context=True):
     await bot.say("http://is2.4chan.org/vg/1486404760144.gif")
 
-@bot.command()
-async def roll(dice : str):
+@bot.command(pass_context=True)
+async def roll(ctx,dice : str):
     """Rolls a dice in NdN format."""
     try:
             rolls, limit = map(int, dice.split('d'))
     except Exception:
-        await bot.say('Format has to be in NdN!')
+        await ctx.send('Format has to be in NdN!')
         return
     if(rolls > 50 or limit > 50):
         result = 'HEY NOW THAT\'S A LOTTA DICE!'
     else:
         result = ', '.join(str(random.randint(1, limit)) for r in range(rolls))
-    await bot.say(result)
-    print (bot.get_channel())
-    bot.send_message(bot.get_channel, 'boop')
+    await ctx.send(result)
 @bot.command(description='For when you wanna settle the score some other way')
 async def choose(*choices : str):
     """Chooses between multiple choices."""
     await bot.say(random.choice(choices))
-@bot.command()
-async def KrillMe():
+@bot.command(pass_context=True)
+async def KrillMe(ctx):
     """Posts Krill"""
-    await bot.say("http://coolaustralia.org/wp-content/uploads/2013/05/billandwill.jpg")
-@bot.command()
-async def Mods():
-    """Posts Mods"""
-    if (random.randint(0,1) == 1):
-        await bot.say("Don't mind me, just taking my hotdogs for a walk ( ͡° ͜ʖ ͡°)╯╲___ :hotdog:")
-    else:
-        await bot.say("( ͡° ͜ʖ ͡°)╯╲___卐卐卐卐")
+    await ctx.send("https://prod-media.coolaustralia.org/wp-content/uploads/2013/05/06205928/billandwill.jpg")
+
 @bot.command()
 async def Stalin():
     """Posts Stalin"""
     await bot.say("http://imgur.com/gallery/jXMUIYP")
-@bot.command(description='Actually implemented by me')
-async def Farage():
-    """Does largely Nothing"""
-    await bot.say("You can't barrage the farage! http://www.thereveillenwu.com/wp-content/uploads/2016/06/6a00d8341bf8f353ef017eeacb1b2e970d.jpg");
 @bot.command()
 async def Kojimbo():
     """Kojima-san"""
     await bot.say("http://static1.gamespot.com/uploads/original/43/434805/3064712-1248675325-Hideo.jpg")
-@bot.command()
-async def repeat(times : int, content='repeating...'):
+@bot.command(pass_context=True)
+async def repeat(ctx, times : int, content='repeating...'):
     """Repeats a message multiple times."""
     for i in range(times):
-        await bot.say(content)
+        await ctx.send(content)
 @bot.command()
 async def joined(member : discord.Member):
     """Says when a member joined."""
@@ -132,10 +133,10 @@ async def joined(member : discord.Member):
 async def Mike(amount : int):
     """The best FORTRAN programmer"""
     await bot.say("https://i1.rgstatic.net/ii/profile.image/AS%3A272457688940593@1441970383991_l/Mike_Roggenkamp.png " * amount)
-@bot.command()
-async def hotdogs(amount : int):
+@bot.command(pass_context=True)
+async def hotdogs(ctx, amount : int):
     """Posts a set amount of hotdogs based on input"""
-    await bot.say(":hotdog: " * amount)
+    await ctx.send( ":hotdog: " * amount)
 @bot.command()
 async def Hariotttt():
     """Post ainsley"""
@@ -148,19 +149,13 @@ async def JoJo():
 async def Tides():
     """How quickly the tides turn"""
     await bot.say("http://i1.kym-cdn.com/photos/images/original/001/072/409/23c.gif")
-@bot.command()
-async def meme(message):
-    await bot.send_message(message.channel, foo, tts=1)
+@bot.command(pass_context=True)
+async def meme(ctx, message):
+    await ctx.send( message, tts=1)
     return 'boop'
 @bot.command()
 async def Delet():
     """Posts Delet this"""
     await bot.say("http://imgur.com/a/QrzQV")
-#@asyncio.coroutine
-#def on_message(message):
-    #yield from self.process_commands(message)
-   # if("jimmy" in message.content ):
-        #foo=random.choice(["day seven. still have not finished the binding of isaac", "NEVER SHOULD HAVE COME HERE", "YOU'VE VIOLATED MY MOTHER!", "PICKED A BAD TIME TO GET LOST FRIEND", "You'll MAKE A FINE RUG, CAT", "Am I supposed to stand idly by WHILE A DRAGON BURNS MY HOLD AND SLAUGHTERS MY PEOPLE!?","porque no los dos","tough love is the only love","ukraine is game to you!?","https://i1.rgstatic.net/ii/profile.image/AS%3A272457688940593@1441970383991_l/Mike_Roggenkamp.png ","Don't mind me, just taking my hotdogs for a walk ( ͡° ͜ʖ ͡°)╯╲___ :hotdog:","( ͡° ͜ʖ ͡°)╯╲___卐卐卐卐","http://coolaustralia.org/wp-content/uploads/2013/05/billandwill.jpg","Remember the playlist!", "I blame Sean personally.", ".play seinfeld in the trap", "Don't forget I hate you all", "Don't forget you're here forever", "have you tried turning it on and off again", "that's the dumbest shit I've heard today.", "delete that fucking bird right now I swear to god", "nice microphone quality", "get a headset", "I might be a nazi mod but at least I'm not the one posting shit", "beep boop sean is a ro-bot", "arma 3 isn't a game it's a tactical simulator", "that's XCOM baby", "not my fault you're shit at games", "My anime is better than yours, by virtue of how awful it is"])
-        #bot.send_message(message.channel, foo, tts=1)
-    #print('bloop')
+
 bot.run("MjYxNDkwODE2NzQzMTEyNzA0.Cz1-Yg.mUHdeAMQqEWxYfor9UiXk6UnhPg")
